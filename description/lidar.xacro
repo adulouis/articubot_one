@@ -4,7 +4,7 @@
         <origin rpy="0 0 0" xyz="-0.0675 -0.0002 0.05"/>
         <parent link="lid"/>
         <child link="lidar"/>
-      </joint>
+    </joint>
 
     <link name="lidar">
         <inertial>
@@ -30,43 +30,34 @@
 
     <gazebo reference="lidar">
         <material>Gazebo/Black</material>
-        <sensor type="laser" name="ray">
-          <pose>0 0 0 0 0 0</pose>
-          <visualize>true</visualize>
-          <update_rate>10</update_rate>
-          <ray>
-            <scan>
-              <horizontal>
-                <samples>720</samples>
-                <resolution>1</resolution>
-                <min_angle>-2.87979</min_angle>
-                <max_angle>2.87979</max_angle>
-              </horizontal>
-            </scan>
-            <range>
-              <min>0.10</min>
-              <max>20.0</max>
-              <resolution>0.01</resolution>
-            </range>
-            <noise>
-              <type>gaussian</type>
-              <!-- Noise parameters based on published spec for Hokuyo laser
-                   achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
-                   stddev of 0.01m will put 99.7% of samples within 0.03m of the true
-                   reading. -->
-              <mean>0.0</mean>
-              <stddev>0.01</stddev>
-            </noise>
-          </ray>
-          <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
-            <ros>
-                <argument>--ros-args --remap ~/out:=scan</argument>
-            </ros>
-            <output_type>sensor_msgs/LaserScan</output_type>
-            <frameName>lidar</frameName>
-          </plugin>
+        
+        <sensor name = "laser" type="ray">
+            <pose> 0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-2.87979</min_angle>
+                        <max_angle>2.87979</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.10</min>
+                    <max>20.0</max>
+                </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <argument>--ros-args --remap ~/out:=scan</argument>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>lidar</frame_name>
+            </plugin>
         </sensor>
-      </gazebo>
+    </gazebo>
 
 
 </robot>
