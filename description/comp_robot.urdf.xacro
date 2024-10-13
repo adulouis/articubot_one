@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rur_detailed">
+
+    <xacro:include filename = "comp_robot_core.xacro"/>
+    <xacro:include filename="comp_robot.trans"/>
+    
+    
+    <xacro:include filename = "gazebo_control.xacro"/>
+
+    <xacro:include filename = "lidar.xacro"/>
+    <xacro:include filename="camera.xacro"/>
+
+</robot>
